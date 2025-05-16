@@ -25689,7 +25689,7 @@ _.x=i},
 aUX(a){var s,r=J.ai(a),q=r.h(a,"access_token"),p=r.h(a,"token_type"),o=r.h(a,"expires_in")
 r=r.h(a,"user")
 s=J.ai(r)
-return new A.rz(q,p,o,new A.Sa(s.h(r,"first_name"),s.h(r,"last_name"),s.h(r,"email"),s.h(r,"phone"),s.h(r,"password"),s.h(r,"confirmPassword")))},
+return new A.rz(q,p,o,new A.Sa(s.h(r,"first_name"),s.h(r,"last_name"),s.h(r,"email"),s.h(r,"phone"),s.h(r,"password"),s.h(r,"password_confirmation")))},
 rz:function rz(a,b,c,d){var _=this
 _.a=a
 _.b=b
@@ -88380,7 +88380,7 @@ aU(){var s=this
 return A.R(["access_token",s.a,"token_type",s.b,"expires_in",s.c,"user",s.d.aU()],t.N,t.z)}}
 A.Sa.prototype={
 aU(){var s=this
-return A.R(["first_name",s.a,"last_name",s.b,"email",s.c,"phone",s.d,"password",s.e,"confirmPassword",s.f],t.N,t.z)}}
+return A.R(["first_name",s.a,"last_name",s.b,"email",s.c,"phone",s.d,"password",s.e,"password_confirmation",s.f],t.N,t.z)}}
 A.a1P.prototype={
 aU(){var s=this
 return A.R(["opponent_name",s.a,"game_date",s.b,"innings",s.c,"location_type",s.d],t.N,t.z)}}
