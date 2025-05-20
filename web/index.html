@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="flutter_stripe_demo">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>flutter_stripe_demo</title>
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Stripe.js library -->
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+<p>Redirecting to Stripe...</p>
+
+<!-- ✅ Flutter bootstraps service worker from flutter.js -->
+<script src="flutter.js" defer></script>
+
+<!-- Your compiled Flutter app code -->
+<script src="main.dart.js" type="application/javascript"></script>
+</body>
+</html>
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--  <base href="/">-->
+
+<!--  <meta charset="UTF-8">-->
+<!--  <meta content="IE=Edge" http-equiv="X-UA-Compatible">-->
+<!--  <meta name="description" content="A new Flutter project.">-->
+
+<!--  &lt;!&ndash; iOS meta tags & icons &ndash;&gt;-->
+<!--  <meta name="mobile-web-app-capable" content="yes">-->
+<!--  <meta name="apple-mobile-web-app-status-bar-style" content="black">-->
+<!--  <meta name="apple-mobile-web-app-title" content="gaming_web_app">-->
+<!--  <link rel="apple-touch-icon" href="icons/Icon-192.png">-->
+
+<!--  &lt;!&ndash; Favicon &ndash;&gt;-->
+<!--  <link rel="icon" type="image/png" href="favicon.png"/>-->
+
+<!--  &lt;!&ndash; Stripe JS &ndash;&gt;-->
+<!--  <script src="https://js.stripe.com/v3/"></script>-->
+
+<!--  <title>gaming_web_app</title>-->
+<!--  <link rel="manifest" href="manifest.json">-->
+
+<!--  <style>-->
+<!--    #stripe-container {-->
+<!--      margin: 20px;-->
+<!--    }-->
+
+<!--#payment-dialog {-->
+<!--  display: none;-->
+<!--  position: fixed;-->
+<!--  top: 10px; /* closer to top */-->
+<!--  left: 50%;-->
+<!--  transform: translateX(-50%);-->
+<!--  width: 90%;-->
+<!--  max-width: 400px;-->
+<!--  background-color: #323232;-->
+<!--  color: white;-->
+<!--  padding: 12px 24px;-->
+<!--  border-radius: 8px;-->
+<!--  z-index: 99999; /* very high */-->
+<!--  font-family: sans-serif;-->
+<!--  font-size: 16px;-->
+<!--  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);-->
+
+<!--  opacity: 0;-->
+<!--  transition: opacity 0.3s ease;-->
+<!--  pointer-events: auto; /* make sure it can be interacted with if needed */-->
+<!--}-->
+<!--#payment-dialog.show {-->
+<!--  display: block;-->
+<!--  opacity: 1;-->
+<!--}-->
+<!--  </style>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--&lt;!&ndash; Stripe UI container &ndash;&gt;-->
+<!--<div id="stripe-container">-->
+<!--  <div id="card-element"></div>-->
+<!--  <div id="card-errors" role="alert" style="color: red; margin-top: 10px;"></div>-->
+<!--  <button onclick="payWithCard()" style="margin-top: 10px;">Pay</button>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Custom payment dialog &ndash;&gt;-->
+<!--<div id="payment-dialog"></div>-->
+<!--<script>-->
+<!--  const stripe = Stripe('pk_test_51RJ5ROQ7VW5LvG1xARfelRNNUG4uPYklS38PwEuZbH8zi1u8J4jobsmmQpWjPj9mYJ9iU2z2Bo3TfC7IUFDyEYLb00Gi3NvWQA'); // Your key-->
+<!--  const elements = stripe.elements();-->
+<!--  const card = elements.create('card');-->
+<!--  card.mount('#card-element');-->
+
+<!--  function showPaymentDialog(message, isSuccess = true) {-->
+<!--    const dialog = document.getElementById("payment-dialog");-->
+<!--    dialog.style.backgroundColor = isSuccess ? "#4CAF50" : "#f44336"; // Green or Red-->
+<!--    dialog.textContent = message;-->
+
+<!--    dialog.style.display = "block";   // Make visible immediately-->
+<!--    dialog.classList.add("show");     // Add fade-in class-->
+
+<!--    // Hide after 4 seconds with fade-out-->
+<!--    setTimeout(() => {-->
+<!--      dialog.classList.remove("show");-->
+<!--      setTimeout(() => {-->
+<!--        dialog.style.display = "none";-->
+<!--      }, 300);  // fade out duration matches CSS-->
+<!--    }, 4000);-->
+<!--  }-->
+
+<!--  async function payWithCard() {-->
+<!--    const clientSecret = window.clientSecretFromFlutter;-->
+<!--    const amount = window.amountFromFlutter;-->
+
+<!--    // Clear previous errors-->
+<!--    document.getElementById("card-errors").textContent = "";-->
+
+<!--    if (!clientSecret) {-->
+<!--      showPaymentDialog("❌ Client secret not found. Please retry.", false);-->
+<!--      return;-->
+<!--    }-->
+
+<!--    // Show waiting message immediately-->
+<!--    showPaymentDialog("⏳ Waiting for payment...");-->
+
+<!--    try {-->
+<!--      const result = await stripe.confirmCardPayment(clientSecret, {-->
+<!--        payment_method: {-->
+<!--          card: card,-->
+<!--          billing_details: {-->
+<!--            name: 'Test User',-->
+<!--            email: 'test@example.com'-->
+<!--          }-->
+<!--        }-->
+<!--      });-->
+
+<!--      if (result.error) {-->
+<!--        document.getElementById("card-errors").textContent = result.error.message;-->
+<!--        showPaymentDialog("❌ " + result.error.message, false);-->
+<!--      } else if (result.paymentIntent && result.paymentIntent.status === 'succeeded') {-->
+<!--        showPaymentDialog("✅ Payment of $" + (amount / 100).toFixed(2) + " successful!");-->
+<!--      } else {-->
+<!--        showPaymentDialog("⚠️ Payment status: " + (result.paymentIntent?.status || "unknown"), false);-->
+<!--      }-->
+<!--    } catch (e) {-->
+<!--      showPaymentDialog("❌ Payment error: " + (e.message || e), false);-->
+<!--      document.getElementById("card-errors").textContent = e.message || e;-->
+<!--    }-->
+<!--  }-->
+<!--</script>-->
+
+<!--&lt;!&ndash; Flutter app script &ndash;&gt;-->
+<!--<script src="flutter_bootstrap.js" async></script>-->
+<!--</body>-->
+<!--</html>-->
