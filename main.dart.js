@@ -98074,7 +98074,7 @@ j.toString
 s=7
 return A.n(A.aAM(k,A.dK(j,null)),$async$w0)
 case 7:m=b
-if(m.c.a!=null&&m.c.a.length!==0){k=o.id
+if(m.c.a.length!==0){k=o.id
 j=m.c
 j.toString
 k.sl(0,j)
@@ -98082,7 +98082,7 @@ j=m.c
 j.toString
 o.k2.sl(0,j)
 k.dx$.cd(k.gl(0))
-if(m.c.a!=null&&m.c.a.length!==0){k=o.p2
+k=o.p2
 j=m.c.a
 j.toString
 k.sl(0,j)
@@ -98102,7 +98102,7 @@ if(g!=null)g.X(0,k.dx$)
 g=k.fr$
 g===$&&A.b()
 g=J.h(g,0).d
-o.a03(h,g.gp(g));++l}}}q=1
+o.a03(h,g.gp(g));++l}}q=1
 s=5
 break
 case 3:q=2
